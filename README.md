@@ -6,9 +6,9 @@ Template for your new Flask blog!
 
 ## Read the guide on my blog
 
-[Build a Flask blog Part 1](https://www.sedexdev.co.uk/build_a_flask_blog_part_1)
-[Build a Flask blog Part 2](https://www.sedexdev.co.uk/build_a_flask_blog_part_2)
-[Build a Flask blog Part 3](https://www.sedexdev.co.uk/build_a_flask_blog_part_3)
+[Build a Flask blog Part 1](https://www.sedexdev.co.uk/build_a_flask_blog_part_1)</br>
+[Build a Flask blog Part 2](https://www.sedexdev.co.uk/build_a_flask_blog_part_2)</br>
+[Build a Flask blog Part 3](https://www.sedexdev.co.uk/build_a_flask_blog_part_3)</br>
 
 ## Hosting
 
