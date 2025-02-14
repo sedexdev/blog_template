@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="flex justify-center mb-16">
+    <img
+        src="{{ url_for('static', filename=post.head_img) }}"
+        alt="Post heading image"
+    />
+</div>
+<h1
+    class="border-b-2 border-slate-800 text-2xl tracking-wider font-bold my-8 pb-4"
+>
+    {{ post.title }}
+</h1>
+<p class="my-4">Published: {{ post.date }}</p>
+<div class="flex flex-row my-4">
+    {% for tag in post.tags %}
+    <form action="{{ url_for('posts.search')}}" method="POST">
+        <input
+            class="bg-slate-200 hover:bg-slate-300 transition-all duration-400 ease-in-out cursor-pointer text-md tracking-wider rounded-lg block mr-4 py-1 px-2"
+            name="search"
+            id="search"
+            type="submit"
+            value="{{ tag }}"
+        />
+    </form>
+    {% endfor %}
+</div>
+<div>
+    {% if related %}
+    <h2 class="text-xl font-bold mt-12 mb-2">Related Posts</h2>
+    <div>
+        {% for post in related %}
+        <a class="text-xl cursor-pointer" href="{{ url_for(post.route) }}">
+            <div
+                class="w-full text-slate-800 hover:text-white transition-all duration-400 ease-in-out rounded my-4 py-2 pl-4"
+            >
+                <p>{{ post.title }}</p>
+                <p class="text-sm mt-2">
+                    {{ post.date }} - {{ post.meta_description }}
+                </p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+{% block post_content %} {% endblock %} {% endblock %}

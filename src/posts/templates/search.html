@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="my-4 mb-12">
+    <h1 class="text-3xl font-bold tracking-wider">Search</h1>
+</div>
+<p>Go on, have a search...</p>
+<br />
+<form
+    class="flex flex-col justify-between"
+    action="{{ url_for('posts.search') }}"
+    method="post"
+>
+    <input
+        class="h-12 text-slate-800 rounded-md placeholder:italic border-2 focus:outline-none focus:border-slate-800 pl-4"
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Search term"
+    />
+    <button
+        class="text-white font-bold bg-slate-500 hover:bg-slate-800 transition-all duration-400 ease-in-out cursor-pointer rounded-md my-6 p-4"
+        type="submit"
+    >
+        Search
+    </button>
+</form>
+{% if message %}
+<p class="text-lg italic mb-4">{{ message }}</p>
+{% endif %} {% endblock %}

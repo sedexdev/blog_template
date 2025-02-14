@@ -1,0 +1,50 @@
+---
+name: Lint-Audit-Test
+permissions: read-all
+on:
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - "README.md"
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Install dependencies
+              run: pip install -r src/requirements.txt
+            - name: Lint code
+              run: pylint src/*.py
+    audit:
+        needs: lint
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Audit code
+              uses: pypa/gh-action-pip-audit@v1.1.0
+              with:
+                  inputs: src/requirements.txt
+    test:
+        needs: [lint, audit]
+        env:
+            FLASK_ENV: development
+            FLASK_APP: src
+            FLASK_DEBUG: True
+            SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Install dependencies
+              run: pip install -r src/requirements.txt
+            - name: Test code
+              run: pytest tests/*.py

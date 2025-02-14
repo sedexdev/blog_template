@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="my-4 mb-12">
+    <h1 class="text-3xl font-bold tracking-wider">Posts</h1>
+</div>
+{% if not posts %}
+<div class="my-4">
+    <p class="text-xl italic">No posts found</p>
+</div>
+{% else %} {% for post in posts %}
+<a href="{{  url_for(post.route) }}">
+    <div
+        class="flex flex-col min-[1400px]:flex-row hover:bg-slate-200 min-[1400px]:border-slate-800 min-[1400px]:border-l-4 mb-8 p-4"
+    >
+        <div>
+            <img
+                class="w-inherit min-[1400px]:w-64 h-[150px] max-[1400px]:h-auto"
+                src="{{ url_for('static', filename=post.head_img) }}"
+                alt="Post image"
+            />
+        </div>
+        <div
+            class="flex flex-col justify-between min-[1400px]:ml-6 max-[767px]:mt-4"
+        >
+            <p class="text-xl mb-1 max-[1400px]:my-2">{{ post.title }}</p>
+            <p class="text-xl mb-1 max-[1400px]:my-2">{{ post.date }}</p>
+            <p class="text-lg mb-1 max-[1400px]:my-2">
+                {{ post.meta_description }}
+            </p>
+            <div
+                class="flex flex-row max-md:flex-wrap max-md:gap-1 max-[1400px]:mt-4"
+            >
+                {% for tag in post.tags %}
+                <p
+                    class="bg-slate-400 text-sm md:text-md tracking-wider rounded-lg block mr-2 py-1 px-2"
+                    href="#"
+                >
+                    {{ tag }}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</a>
+{% endfor %} {% endif %} {% endblock %}

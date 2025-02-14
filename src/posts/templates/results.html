@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="my-4 mb-12">
+    <h1 class="text-3xl font-bold tracking-wider">Results for '{{ query }}'</h1>
+</div>
+{% if not posts %}
+<p class="text-lg italic tracking-wider my-8">No posts found</p>
+{% else %} {% for post in posts %}
+<a href="{{  url_for(post.route) }}">
+    <div
+        class="flex flex-col md:flex-row bg-gradient-to-tr md:border-slate-800 md:border-l-4 mb-8 p-4"
+    >
+        <div>
+            <img
+                class="w-inherit md:w-64 h-auto"
+                src="{{ url_for('static', filename=post.head_img) }}"
+                alt="Post image"
+            />
+        </div>
+        <div class="flex flex-col justify-between mt-4 md:ml-6">
+            <p class="text-xl">{{ post.title }}</p>
+            <p class="mt-2">{{ post.date }}</p>
+            <div class="flex flex-row max-md:flex-wrap max-md:gap-1 mt-6">
+                {% for tag in post.tags %}
+                <p
+                    class="bg-slate-200 text-sm md:text-md tracking-wider rounded-lg block mr-2 py-1 px-2"
+                    href="#"
+                >
+                    {{ tag }}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</a>
+{% endfor %} {% endif %} {% endblock %}

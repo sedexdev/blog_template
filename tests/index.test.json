@@ -1,0 +1,26 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "path": "/test",
+            "route": "posts.test",
+            "title": "Test Post",
+            "date": "26/09/2024",
+            "tags": ["python", "flask", "docker", "test"],
+            "head_img": "images/test.png",
+            "meta_description": "Post containing test content for development purposes",
+            "related": []
+        },
+        {
+            "id": 2,
+            "path": "/some_test",
+            "route": "posts.some_test",
+            "title": "Some test",
+            "date": "11/02/2025",
+            "tags": ["some", "test", "thing"],
+            "head_img": "images/some_test.png",
+            "meta_description": "Some test",
+            "related": [1]
+        }
+    ]
+}

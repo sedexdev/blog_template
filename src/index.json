@@ -1,0 +1,15 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "path": "/test",
+            "route": "posts.test",
+            "title": "Test Post",
+            "date": "14/02/2025",
+            "tags": ["test", "flask", "pythonanywhere"],
+            "head_img": "images/post.jpg",
+            "meta_description": "Demo post to test the blog",
+            "related": []
+        }
+    ]
+}

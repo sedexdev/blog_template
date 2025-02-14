@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ title }}</title>
+        <link
+            rel="shortcut icon"
+            href="{{ url_for('static', filename='images/favicon/favicon.ico') }}"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url_for('static', filename='css/output.css') }}"
+        />
+    </head>
+    <body>
+        <!-- outer container -->
+        <div class="flex flex-col md:flex-row text-slate-800">
+            <!-- side panel desktop -->
+            <div
+                class="hidden md:block w-full md:w-96 border-b-2 md:border-b-0 md:border-r-2 border-slate-800"
+            >
+                <!-- image and links -->
+                <div
+                    class="w-full md:w-96 sticky top-24 left-1/4 text-center tracking-wide"
+                >
+                    <img
+                        class="h-56 w-56 rounded-full border-4 border-slate-800 my-8 m-auto"
+                        src="{{ url_for('static', filename='images/sky.jpg') }}"
+                        alt="avatar"
+                    />
+                    <h1 class="text-2xl font-bold pb-6">My Blog</h1>
+                    <span
+                        class="block w-16 h-4 border-b-4 border-slate-800 m-auto"
+                    ></span>
+                    <div class="flex flex-col justify-center my-8 text-xl">
+                        <a
+                            class="w-fit m-auto mb-2"
+                            href="{{ url_for('core.index') }}"
+                            ><span class="cursor-pointer hover:text-slate-800"
+                                >About</span
+                            ></a
+                        >
+                        <a
+                            class="w-fit m-auto mb-2"
+                            href="{{ url_for('posts.search') }}"
+                            ><span class="cursor-pointer hover:text-slate-800"
+                                >Search</span
+                            ></a
+                        >
+                        <a
+                            class="w-fit m-auto"
+                            href="{{ url_for('posts.posts') }}"
+                            ><span class="cursor-pointer hover:text-slate-800"
+                                >Posts</span
+                            ></a
+                        >
+                    </div>
+                </div>
+            </div>
+            <!-- side panel mobile -->
+            <div>
+                <header
+                    class="block md:hidden h-24 w-full border-b-2 border-slate-800"
+                >
+                    <div class="flex justify-between h-full">
+                        <div class="flex items-center">
+                            <a href="{{ url_for('core.index') }}">
+                                <img
+                                    class="h-16 w-16 rounded-full border-2 border-slate-800 mx-4"
+                                    src="{{ url_for('static', filename='images/sky.jpg') }}"
+                                    alt="avatar"
+                                />
+                            </a>
+                            <p class="text-xl font-bold">My Blog</p>
+                        </div>
+                        <div class="flex items-center pr-4">
+                            <button
+                                class="group inline-flex w-12 h-12 text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-700 text-center items-center justify-center rounded shadow-[0_1px_0_theme(colors.slate.950/.04),0_1px_2px_theme(colors.slate.950/.12),inset_0_-2px_0_theme(colors.slate.950/.04)] hover:shadow-[0_1px_0_theme(colors.slate.950/.04),0_4px_8px_theme(colors.slate.950/.12),inset_0_-2px_0_theme(colors.slate.950/.04)] transition"
+                                aria-pressed="false"
+                                onclick="this.setAttribute('aria-pressed', !(this.getAttribute('aria-pressed') === 'true')), toggleMobileMenu()"
+                            >
+                                <span class="sr-only">Menu</span>
+                                <svg
+                                    class="w-6 h-6 fill-current pointer-events-none"
+                                    viewBox="0 0 16 16"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <rect
+                                        class="origin-center -translate-y-[5px] translate-x-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-[[aria-pressed=true]]:translate-x-0 group-[[aria-pressed=true]]:translate-y-0 group-[[aria-pressed=true]]:rotate-[315deg]"
+                                        y="7"
+                                        width="9"
+                                        height="2"
+                                        rx="1"
+                                    ></rect>
+                                    <rect
+                                        class="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-[[aria-pressed=true]]:rotate-45"
+                                        y="7"
+                                        width="16"
+                                        height="2"
+                                        rx="1"
+                                    ></rect>
+                                    <rect
+                                        class="origin-center translate-y-[5px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-[[aria-pressed=true]]:translate-y-0 group-[[aria-pressed=true]]:rotate-[135deg]"
+                                        y="7"
+                                        width="9"
+                                        height="2"
+                                        rx="1"
+                                    ></rect>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <!-- mobile menu -->
+            <div
+                id="mobile-menu"
+                class="hidden md:hidden absolute h-fit w-full top-25 right-0 bg-white mt-24"
+            >
+                <ul class="text-center">
+                    <li
+                        class="hover:bg-slate-400 border-b border-slate-600 p-4"
+                    >
+                        <a
+                            class="hover:text-slate-800 text-xl font-bold cursor-pointer"
+                            href="{{ url_for('core.index') }}"
+                            >Home</a
+                        >
+                    </li>
+                    <li
+                        class="hover:bg-slate-400 border-b border-slate-600 p-4"
+                    >
+                        <a
+                            class="hover:text-slate-800 text-xl font-bold cursor-pointer"
+                            href="{{ url_for('posts.posts') }}"
+                            >Posts</a
+                        >
+                    </li>
+                    <li
+                        class="hover:bg-slate-400 border-b border-slate-600 p-4"
+                    >
+                        <a
+                            class="hover:text-slate-800 text-xl font-bold cursor-pointer"
+                            href="{{ url_for('posts.search') }}"
+                            >Search</a
+                        >
+                    </li>
+                </ul>
+            </div>
+            <!-- main content -->
+            <div
+                class="w-full md:w-4/5 min-h-screen tracking-wider py-16 px-6 lg:py-32 lg:px-40 min-[1200px]:px-52"
+            >
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    </body>
+</html>
