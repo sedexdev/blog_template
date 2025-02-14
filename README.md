@@ -39,4 +39,4 @@ To update the site you will do the following:
 
 ## License
 
-[MIT](https://github.com/sedexdev/sedexdevblog/blob/main/LICENSE)
+[MIT](https://github.com/sedexdev/blog_template/blob/main/LICENSE)
