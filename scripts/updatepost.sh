@@ -5,8 +5,7 @@
 
 # During script execution
 #   1. ! Content is not updated !
-#   2. Optionally update the date if you have modified the post content and want to reflect the update
-#   3. Leave a field blank to keep the existing value 
+#   2. Leave a field blank to keep the existing value 
 
 # check $1 was provided and is a single integer value
 if [[ -z "$1" ]]; then
@@ -101,13 +100,17 @@ for id in "${id_array[@]}"; do
 done
 RELATED="${RELATED%,}]"
 
+# update the date
+UPDATED_DATE=$(date +"%d/%m/%Y")
+
 # update the post in the index.json file
-jq --arg id "$POST_ID" --arg title "$title" --arg image "$image" --argjson tags "$JSON_TAGS" --arg description "$description" --argjson related "$RELATED" \
+jq --arg id "$POST_ID" --arg title "$title" --arg image "$image" --argjson tags "$JSON_TAGS" --arg description "$description" --argjson related "$RELATED" --arg updated "$UPDATED_DATE" \
     '(.posts[] | select(.id == ($id | tonumber)) | .title) = $title | 
      (.posts[] | select(.id == ($id | tonumber)) | .head_img) = $image | 
      (.posts[] | select(.id == ($id | tonumber)) | .tags) = $tags | 
      (.posts[] | select(.id == ($id | tonumber)) | .meta_description) = $description | 
-     (.posts[] | select(.id == ($id | tonumber)) | .related) = $related' \
+     (.posts[] | select(.id == ($id | tonumber)) | .related) = $related |
+     (.posts[] | select(.id == ($id | tonumber)) | .updated) = $updated' \
     "${INDEX_JSON}" > tmp.json && mv tmp.json "${INDEX_JSON}"
 
 echo ""
